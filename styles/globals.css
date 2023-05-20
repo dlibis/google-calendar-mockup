@@ -8,6 +8,10 @@
     --primary: rgb(26,115,232);
     --on-surface-variant-agm: #70757a;
     --on-surface: rgb(60,64,67);
+    --secondary-variant: rgb(210,227,252);
+    --on-secondary-variant: rgb(24,90,188);
+    --surface: #fff;
+    --on-secondary: rgb(25,103,210);
 
 }
 
@@ -51,6 +55,25 @@ a {
   width: max-content;
 
 }
+.todayClassMini{
+  
+  color: var(--on-secondary-variant);
+  background-color: var(--secondary-variant);
+}
+
 .notCurrentMonth{
   color: var(--on-surface-variant-agm);
+}
+
+.innerModal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400;
+  transition: opacity .2s ease-in-out;
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,.14),0 9px 46px 8px rgba(0,0,0,.12),0 11px 15px -7px rgba(0,0,0,.2);
+  background-color: var(--surface);
+  border-radius: 8px;
+  min-width:448px
 }

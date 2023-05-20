@@ -4,10 +4,10 @@ const theme = createTheme({
   components: {
     MuiTypography: {
       styleOverrides: {
-        root: {
-          body1: {
-            fontSize: 14,
-          },
+        body1: {
+          fontSize: 14,
+          fontWeight: "500",
+          color: "var(--on-surface)",
         },
       },
     },
@@ -19,10 +19,7 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: "48px",
           textTransform: "unset",
-          backgroundColor: "transparent",
-          color: "#222",
         },
       },
     },

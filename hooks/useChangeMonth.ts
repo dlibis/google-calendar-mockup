@@ -4,8 +4,10 @@ import { formateDateObject } from "@/utils/utils";
 export const useChangeMonth = () => {
   const now = dayjs();
   const [currentMonth, setCurrentMonth] = useState(now);
-
   const [allDates, setAllDates] = useState<Record<string, any>[]>([]);
+  const [selectedDate, setSelectedDate] = useState(now);
+
+  const handleSelectedDate = (date: dayjs.Dayjs) => setSelectedDate(date);
 
   const nextMonth = () => {
     const plus = currentMonth.add(1, "month");
@@ -28,7 +30,7 @@ export const useChangeMonth = () => {
     let weekCounter = 1;
 
     while (currentDate.weekday(0).toObject().months !== nextMonth) {
-      const formatted = formateDateObject(currentDate);
+      const formatted = formateDateObject(currentDate, currentMonth);
 
       weekDates.push(formatted);
 
@@ -54,5 +56,7 @@ export const useChangeMonth = () => {
     prevMonth,
     currentMonth,
     allDates,
+    handleSelectedDate,
+    selectedDate,
   };
 };

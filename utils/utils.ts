@@ -13,14 +13,15 @@ export const getDaysInMonth = (month = 1) => {
     .daysInMonth();
   return days;
 };
-export const formateDateObject = (date) => {
+export const formateDateObject = (date, currentMonth) => {
   const clonedObject = { ...date.toObject() };
 
   const formattedObject = {
     day: clonedObject.date,
     month: clonedObject.months,
     year: clonedObject.years,
-    isCurrentMonth: clonedObject.months === dayjs().month(),
+    dayjsDate: date,
+    isCurrentMonth: clonedObject.months === currentMonth.month(),
     isCurrentDay: date.isToday(),
   };
 
@@ -57,10 +58,10 @@ export const getAllDays = (currentMonth) => {
   return allDates;
 };
 
-export const getWeekDays = () => {
+export const getWeekDays = (format = "ddd") => {
   const weekDays: string[] = [];
   for (let i = 0; i < 7; i++) {
-    weekDays.push(dayjs().weekday(i).format("ddd"));
+    weekDays.push(dayjs().weekday(i).format(format));
   }
   return weekDays;
 };

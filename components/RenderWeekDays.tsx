@@ -1,8 +1,8 @@
 import { getWeekDays } from "@/utils/utils";
 import { Box, Typography } from "@mui/material";
 
-export const RenderWeekDays = () => {
-  const weekdays = getWeekDays();
+export const RenderWeekDays = ({ format }) => {
+  const weekdays = getWeekDays(format);
 
   return (
     <Box display={"flex"} sx={{ height: "20px", alignItems: "strech" }}>
@@ -18,15 +18,16 @@ export const RenderWeekDays = () => {
           key={weekday}
         >
           <Typography
+            className="weekDay"
             sx={{
               color: "var(--on-surface-variant-agm)",
               fontSize: "11px",
-              fontWeight: "500px",
+              fontWeight: "500",
               lineHeight: "20px",
               textTransform: "uppercase",
             }}
           >
-            {weekday}
+            {format === "dd" ? weekday.slice(0, 1) : weekday}
           </Typography>
         </Box>
       ))}
