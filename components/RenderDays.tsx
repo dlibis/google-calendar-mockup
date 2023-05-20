@@ -1,15 +1,17 @@
+import MonthContext from "@/context/MonthContext";
 import { useChangeMonth } from "@/hooks/useChangeMonth";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import dayjs from "dayjs";
+import { useContext } from "react";
 
-export const RenderDays = ({ allDates }) => {
-  const arrayOfDays = allDates;
+export const RenderDays = () => {
+  const { allDates } = useContext(MonthContext);
 
   return (
     <Box display={"flex"} flexDirection={"column"} sx={{ flex: "1 1 0%" }}>
-      {(arrayOfDays || []).map((week, index) => (
+      {(allDates || []).map((week, index) => (
         <Box
           display="flex"
           sx={{ flex: "1 1 0%", borderBottom: "var(--hairline) 1px solid" }}

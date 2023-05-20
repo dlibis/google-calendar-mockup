@@ -13,18 +13,18 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useChangeMonth } from "@/hooks/useChangeMonth";
+import MonthContext from "@/context/MonthContext";
 
 type Props = {};
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
-
-  const { nextMonth, prevMonth, currentMonth } = useChangeMonth();
+  const { currentMonth, nextMonth, prevMonth } = useContext(MonthContext);
 
   const handleDrawerOpen = () => {
     setOpen(true);

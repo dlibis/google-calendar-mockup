@@ -5,7 +5,7 @@ export const useChangeMonth = () => {
   const now = dayjs();
   const [currentMonth, setCurrentMonth] = useState(now);
 
-  const [allDates, setAllDate] = useState([]);
+  const [allDates, setAllDates] = useState<Record<string, any>[]>([]);
 
   const nextMonth = () => {
     const plus = currentMonth.add(1, "month");
@@ -20,12 +20,10 @@ export const useChangeMonth = () => {
   };
 
   const getAllDays = useCallback(() => {
-    console.log("here");
     let currentDate = currentMonth.startOf("month").weekday(0);
     const nextMonth = currentMonth.add(1, "month").month();
-
-    let allDatesLocal = [];
-    let weekDates = [];
+    let allDatesLocal: Record<string, any>[] = [];
+    let weekDates: Record<string, any>[] = [];
 
     let weekCounter = 1;
 
@@ -43,14 +41,11 @@ export const useChangeMonth = () => {
       weekCounter++;
       currentDate = currentDate.add(1, "day");
     }
-
-    console.log(allDatesLocal);
-    setAllDate(allDatesLocal);
-    //return allDates;
+    setAllDates(allDatesLocal);
+    return allDates;
   }, [currentMonth]);
 
   useEffect(() => {
-    console.log("testststt");
     getAllDays();
   }, [currentMonth]);
 
