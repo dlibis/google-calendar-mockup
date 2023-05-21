@@ -106,9 +106,13 @@ const Navbar: React.FC = () => {
                   }}
                   //onChange={handleChange}
                 >
+                  <MenuItem disabled value={"day"}>
+                    Day
+                  </MenuItem>
+                  <MenuItem disabled value={"week"}>
+                    Week
+                  </MenuItem>
                   <MenuItem value={"month"}>Month</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
               </FormControl>
             </Box>

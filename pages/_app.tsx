@@ -6,11 +6,16 @@ import "@/styles/globals.css";
 import theme from "@/theme/theme";
 import { ThemeProvider } from "@mui/material/styles";
 import type { AppProps } from "next/app";
-import { useState } from "react";
+import { useCallback, useState } from "react";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showModal, setShowModal] = useState(false);
   const [newEvent, setNewEvent] = useState(false);
+  const [modalType, setModalType] = useState<"create" | "edit">("create");
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const {
     currentMonth,
     allDates,
@@ -20,9 +25,13 @@ export default function App({ Component, pageProps }: AppProps) {
     selectedDate,
   } = useChangeMonth();
 
-  const handleShowModal = () => setShowModal((prev) => !prev);
+  const handleShowModal = (value: boolean) => setShowModal(value);
 
-  const handleNewEvent = (value) => setNewEvent(value);
+  const handleNewEvent = (value: boolean) => setNewEvent(value);
+
+  const handleSetModalType = (value: "create" | "edit") => setModalType(value);
+
+  const handleSelectedEvent = (value) => setSelectedEvent(value);
 
   return (
     <ThemeProvider theme={theme}>
@@ -38,8 +47,13 @@ export default function App({ Component, pageProps }: AppProps) {
           handleShowModal,
           handleNewEvent,
           newEvent,
+          modalType,
+          handleSetModalType,
+          handleSelectedEvent,
+          selectedEvent,
         }}
       >
+        <ToastContainer />
         <EventModal />
         <Layout>
           <Component {...pageProps} />
