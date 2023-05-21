@@ -72,6 +72,8 @@ a {
   border-radius: 50%;
   min-width: 24px;
   width: max-content;
+  margin-left: auto;
+  margin-right: auto;
 
 }
 .todayClassMini{

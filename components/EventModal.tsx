@@ -7,12 +7,28 @@ import {
   Button,
   IconButton,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import instance from "@/utils/axios";
 
 export const EventModal = () => {
-  const { showModal, handleShowModal, selectedDate } = useContext(MonthContext);
+  const { showModal, handleShowModal, selectedDate, handleNewEvent } =
+    useContext(MonthContext);
+  const inputRef = useRef<HTMLInputElement>();
+
+  const createEvent = () => {
+    instance
+      .post("/events", {
+        title: inputRef.current!.value,
+        date: selectedDate.format(),
+      })
+      .then(console.log)
+      .catch(console.log);
+    handleShowModal();
+    handleNewEvent(true);
+  };
+
   return (
     <Modal open={showModal} onClose={handleShowModal} hideBackdrop>
       <Box className="innerModal">
@@ -28,6 +44,7 @@ export const EventModal = () => {
               variant="standard"
               fullWidth
               sx={{ ".MuiInputLabel-root": { fontSize: "22px" } }}
+              inputRef={inputRef}
             />
           </Box>
           <Box display={"flex"} mt={2}>
@@ -65,7 +82,9 @@ export const EventModal = () => {
           </Box>
         </Box>
         <Box display={"flex"} justifyContent={"end"} p={2}>
-          <Button variant="contained">Save</Button>
+          <Button variant="contained" onClick={createEvent}>
+            Save
+          </Button>
         </Box>
       </Box>
     </Modal>

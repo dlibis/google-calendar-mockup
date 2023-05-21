@@ -1,14 +1,41 @@
 import MonthContext from "@/context/MonthContext";
 import { useChangeMonth } from "@/hooks/useChangeMonth";
+import instance from "@/utils/axios";
 
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
 import dayjs from "dayjs";
-import { useContext } from "react";
+import { GetStaticProps } from "next/types";
+import { useContext, useEffect, useState } from "react";
 
 export const RenderDays = () => {
-  const { allDates, handleSelectedDate, handleShowModal } =
-    useContext(MonthContext);
+  const [events, setEvents] = useState([]);
+  const {
+    allDates,
+    handleSelectedDate,
+    handleShowModal,
+    newEvent,
+    handleNewEvent,
+  } = useContext(MonthContext);
+
+  const getEventTitle = (dayjsDate) => {
+    return events.find((el) => el.eventDay === dayjsDate.format("DD MM"))
+      ?.title;
+  };
+
+  useEffect(() => {
+    instance.get("/events").then(({ data }) => {
+      const parsedDateData = data.map((el) => ({
+        ...el,
+        eventDay: dayjs(el.date).format("DD MM"),
+      }));
+      setEvents(parsedDateData);
+    });
+    handleNewEvent(false);
+  }, [newEvent]);
+
+  console.log(events);
 
   return (
     <Box display={"flex"} flexDirection={"column"} sx={{ flex: "1 1 0%" }}>
@@ -26,7 +53,7 @@ export const RenderDays = () => {
                   handleShowModal();
                 }}
                 display={"flex"}
-                justifyContent={"center"}
+                flexDirection={"column"}
                 sx={{
                   flex: "1 1 0%",
                   borderRight: "var(--hairline) 1px solid",
@@ -51,6 +78,24 @@ export const RenderDays = () => {
                   {dayjsDate.format("D")}{" "}
                   {day === 1 && dayjs(month).month(month).format("MMM")}
                 </Typography>
+                {getEventTitle(dayjsDate) && (
+                  <Box pr={1} mt={0.5}>
+                    <Box
+                      sx={{
+                        backgroundColor: "rgb(121, 134, 203)",
+                        padding: "0 8px",
+                        display: "flex",
+                        alignItems: "center",
+                        borderRadius: "4px",
+                        height: "22px",
+                      }}
+                    >
+                      <Typography sx={{ color: "#fff", fontSize: "12px" }}>
+                        {getEventTitle(dayjsDate)}
+                      </Typography>
+                    </Box>
+                  </Box>
+                )}
               </Box>
             )
           )}

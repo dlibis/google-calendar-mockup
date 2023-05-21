@@ -10,6 +10,7 @@ import { useState } from "react";
 
 export default function App({ Component, pageProps }: AppProps) {
   const [showModal, setShowModal] = useState(false);
+  const [newEvent, setNewEvent] = useState(false);
   const {
     currentMonth,
     allDates,
@@ -20,6 +21,9 @@ export default function App({ Component, pageProps }: AppProps) {
   } = useChangeMonth();
 
   const handleShowModal = () => setShowModal((prev) => !prev);
+
+  const handleNewEvent = (value) => setNewEvent(value);
+
   return (
     <ThemeProvider theme={theme}>
       <MonthContext.Provider
@@ -32,6 +36,8 @@ export default function App({ Component, pageProps }: AppProps) {
           handleSelectedDate,
           showModal,
           handleShowModal,
+          handleNewEvent,
+          newEvent,
         }}
       >
         <EventModal />
