@@ -48,7 +48,7 @@ export const RenderDays = () => {
                       : "var(--on-surface-variant-agm)",
                   }}
                 >
-                  {dayjsDate.format("DD")}{" "}
+                  {dayjsDate.format("D")}{" "}
                   {day === 1 && dayjs(month).month(month).format("MMM")}
                 </Typography>
               </Box>

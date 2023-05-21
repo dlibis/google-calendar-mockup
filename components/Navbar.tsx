@@ -19,6 +19,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
 import { useChangeMonth } from "@/hooks/useChangeMonth";
 import MonthContext from "@/context/MonthContext";
+import Image from "next/image";
 
 type Props = {};
 
@@ -49,7 +50,20 @@ const Navbar: React.FC = () => {
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="h6" noWrap component="div">
+            <Image
+              alt=""
+              src="/calendar.png"
+              width={40}
+              height={40}
+              style={{ marginBottom: "4px", marginRight: "4px" }}
+            />
+            <Typography
+              sx={{
+                fontSize: "22px",
+                color: "rgb(60,64,67)",
+                fontWeight: "unset",
+              }}
+            >
               Calendar
             </Typography>
           </Box>
@@ -70,20 +84,26 @@ const Navbar: React.FC = () => {
               <IconButton onClick={nextMonth}>
                 <ChevronRightIcon />
               </IconButton>
-              <CalendarTodayIcon />
-              <Typography fontSize={"22px"} sx={{ color: "var(--on-surface)" }}>
+
+              <Typography
+                fontSize={"22px"}
+                sx={{ color: "var(--on-surface)", fontWeight: "unset" }}
+              >
                 {currentMonth.format("MMMM YYYY")}
               </Typography>
             </Box>
             <Box sx={{ minWidth: 120 }}>
-              <FormControl fullWidth size="small">
+              <FormControl size="small">
                 <Select
                   labelId="calendar-view"
                   id="demo-simple-select"
                   value={"month"}
                   label="calendar-view"
-                  displayEmpty
                   inputProps={{ "aria-label": "Without label" }}
+                  sx={{
+                    "& legend": { display: "none" },
+                    "& fieldset": { top: 0 },
+                  }}
                   //onChange={handleChange}
                 >
                   <MenuItem value={"month"}>Month</MenuItem>

@@ -49,7 +49,13 @@ export const EventModal = () => {
           alignItems={"center"}
         >
           <Box pr={1}>
-            <AccessTimeIcon />
+            <AccessTimeIcon
+              sx={{
+                fontSize: "20px",
+                color: "var(--on-surface-variant)",
+                fill: "var(--on-surface-variant)",
+              }}
+            />
           </Box>
           <Box>
             <Typography>

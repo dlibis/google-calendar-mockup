@@ -1,6 +1,11 @@
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
+  typography: {
+    allVariants: {
+      fontFamily: ["Google-Sans", "Roboto", "Arial", "sans-serif"].join(","),
+    },
+  },
   components: {
     MuiTypography: {
       styleOverrides: {
