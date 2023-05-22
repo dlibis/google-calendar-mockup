@@ -1,7 +1,9 @@
 import { getWeekDays } from "@/utils/utils";
 import { Box, Typography } from "@mui/material";
 
-export const RenderWeekDays = ({ format }) => {
+type Props = { format?: string };
+
+export const RenderWeekDays: React.FC<Props> = ({ format }) => {
   const weekdays = getWeekDays(format);
 
   return (

@@ -29,7 +29,7 @@ def get_events():
     return events
 
 
-@app.post("/events", response_model=EventResponse)
+@app.post("/events")
 def create_event(event: EventCreate):
     db = SessionLocal()
     db_event = Event(title=event.title, date=event.date)

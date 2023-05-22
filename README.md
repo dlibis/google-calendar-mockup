@@ -6,3 +6,8 @@ In this repo I tried to imitate google's calendar to the point of pixel perfect 
 
 - Next.js
 - FastApi + SQLAlechmy
+
+## Startup:
+
+- docker compose --build
+  -docker compose up

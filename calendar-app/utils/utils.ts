@@ -35,13 +35,20 @@ export const getAllDays = (currentMonth) => {
   let currentDate = currentMonth.startOf("month").weekday(0);
   const nextMonth = currentMonth.add(1, "month").month();
 
-  let allDates = [];
-  let weekDates = [];
+  let allDates: Record<string, any>[] = [];
+  let weekDates: {
+    day: number;
+    month: number;
+    year: number;
+    dayjsDate: dayjs.Dayjs;
+    isCurrentMonth: boolean;
+    isCurrentDay: boolean;
+  }[] = [];
 
   let weekCounter = 1;
 
   while (currentDate.weekday(0).toObject().months !== nextMonth) {
-    const formatted = formateDateObject(currentDate);
+    const formatted = formateDateObject(currentDate, currentMonth);
 
     weekDates.push(formatted);
 
