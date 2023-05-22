@@ -10,4 +10,4 @@ In this repo I tried to imitate google's calendar to the point of pixel perfect 
 ## Startup:
 
 - docker compose --build
-  -docker compose up
+- docker compose up
